@@ -259,7 +259,7 @@ const Component: FC<EditTextProps & {theme: DoobooTheme}> = ({
       <View
         style={[
           compositeStyles.container,
-          editable && hovered && [compositeStyles.hovered, styles?.hovered],
+          editable && hovered && compositeStyles.hovered,
           {
             borderColor: !editable
               ? disableColor
@@ -287,18 +287,14 @@ const Component: FC<EditTextProps & {theme: DoobooTheme}> = ({
           <Text
             style={[
               compositeStyles.labelText,
-              styles?.labelText,
-              hovered && editable
-                ? [compositeStyles.labelTextHovered, styles?.labelTextHovered]
-                : editable
-                ? {
-                    color: errorText
-                      ? errorColor
-                      : focused
-                      ? focusColor
-                      : disableColor,
-                  }
-                : {color: disableColor},
+              hovered && editable && compositeStyles.labelTextHovered,
+              !editable
+                ? {color: disableColor}
+                : errorText
+                ? {color: errorColor}
+                : focused
+                ? {color: focusColor}
+                : {},
             ]}>
             {labelText}
           </Text>
@@ -310,7 +306,6 @@ const Component: FC<EditTextProps & {theme: DoobooTheme}> = ({
           secureTextEntry={secureTextEntry}
           style={[
             compositeStyles.input,
-            styles?.input,
             // @ts-ignore
             Platform.OS === 'web' && {outlineWidth: 0},
           ]}
