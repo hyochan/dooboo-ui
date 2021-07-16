@@ -263,7 +263,7 @@ const Component: FC<EditTextProps & {theme: DoobooTheme}> = ({
           {
             borderColor: !editable
               ? disableColor
-              : hovered
+              : hovered && !focused
               ? hoverColor
               : errorText
               ? errorColor
@@ -274,7 +274,7 @@ const Component: FC<EditTextProps & {theme: DoobooTheme}> = ({
           type !== 'boxed' && {
             borderBottomColor: !editable
               ? disableColor
-              : hovered
+              : hovered && !focused
               ? hoverColor
               : errorText
               ? errorColor
