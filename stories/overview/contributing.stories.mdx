@@ -1,0 +1,252 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="contributing/Contributing" />
+
+## Contribution Guide
+
+> You should be aware of below stacks(do not need to be professional) to contribute to our repository.
+
+1. [React Native](https://reactnative.dev)
+2. [Expo](https://expo.io)
+3. [vscode](https://code.visualstudio.com)
+   - We are using `vscode` as our ide. Please install `eslint` plugin.
+4. [emotion](https://emotion.sh/docs/introduction)
+
+### What you need to consider
+
+> What's been published to `npm` is only the `main` components in `main` directory. This is what you should be considering for production.
+> Please try writing `test code` for components when you've created the new one.
+> We encourage you to write `stories` in `storybook` directory so other users can see [the demo](https://dooboolab.github.io/dooboo-ui) for all components at a glance.
+> You can check out more on [our goal](https://github.com/dooboolab-community/dooboo-ui/discussions/8#discussioncomment-1015465) for the project.
+
+- See also
+  - dooboolab's [vision-and-mission](https://dooboolab.com/vision_and_mission)
+  - dooboolab's [code of conduct](https://dooboolab.com/code_of_conduct)
+- [Contributing](?path=/story/contributing-contributing--page)
+  - Please run `yarn pre` so that the packages are prepared.
+    - If you are having trouble, try to run `yarn install:packages`.
+  - Try to make awesome UI components and test them in `storybook`. Ensure to test in platforms we provide which are `iOS`, `android` and `web`. Then it's all good to go for `pull request`. Give it a try :blossom:.
+- While implementing UI components you should run `yarn watch` in order to build typescript files dynamically while implementing. This is currently the best solution to sync with your typescript code using `package.json`. If you find something more efficient, please give a pull request.
+
+### Installation
+
+1. Fork our project to yours.
+
+   - Recommended to have `forked` main branch to be updated to upstream.
+   - Configure [Syncing a fork](https://help.github.com/articles/configuring-a-remote-for-a-fork/).
+     - `git remote add upstream https://github.com/dooboolab-community/dooboo-ui`
+     - Check it with `git remote -v`
+   - Fetch the branches from upstream repository by `git fetch upstream`
+   - When you want to give `PR`, make new branch `git checkout -b [feature_name]`
+     - Before pushing `PR`, do `git fetch upstream` from main branch then try the rebase by `git rebase main`
+     - Check your status by `git log --decorate --oneline --all --graph`
+
+2. Git clone your forked repository.
+   ```
+   git clone https://github.com/<your-id>/dooboo-ui.git
+   ```
+3. Install your packages
+
+   ```
+   yarn
+   ```
+
+   The components in `packages` folder need to be prepare by lerna.
+
+   ```
+   yarn pre
+   ```
+
+   - Note that we recommend using yarn because all our contributors do.
+   - Also note that `yarn.lock` and `package-lock.json` sometimes make collision.
+     Please use [yarn](https://yarnpkg.com) which we are using in our project.
+
+4. Run your project
+
+   1. **Run metro bundler**
+
+      ```
+      yarn start
+      ```
+
+   2. **Run on ios / android / web**
+
+      You can run in all three platforms with [Expo Dev Tools](https://docs.expo.dev/workflow/development-mode/#toggling-development-mode-in-expo-dev-tools).
+
+      > ️if you face the error `We ran "xcodebuild" command but it exited with error code 65` while running project for the first time,
+      > you might have to follow [the guide](https://github.com/facebook/react-native/issues/24450#issuecomment-516760157) to install [cocoapads](https://cocoapods.org).
+
+5. Configure linting in [vscode](https://code.visualstudio.com) correctly.
+
+   - Example vscode [setting.json](https://gist.github.com/hyochan/815e9040593180c4725d7694d863e5a1)
+
+6. While implementing UI component in [packages](https://github.com/dooboolab-community/dooboo-ui/tree/main/packages), you should run `yarn watch` in order to build typescript file dynamically while coding.
+   This is currently the best solution to sync with your typescript code using `package.json`. If you find something more efficient, please give a pull request.
+
+   > **Finally, you might want to check out [short story for the design](https://github.com/dooboolab-community/dooboo-ui/pull/49#issuecomment-894665037).**
+
+### Commit message
+
+Commit messages should include a title, summary, and test plan.
+
+Write the title in the imperative mood and prefix it with a tag that describes the affected code, like [android] or [video], and makes it easier to read through the commit log.
+
+In the summary, explain the motivation behind the commit ("why") and the approach it takes ("how"). Note things that aren't communicated by the code or require more context to infer.
+
+Use the test plan to communicate how to verify the code actually works and to help others in the future create their test plans for the same area of the codebase. Read the Expo guide on Git and Code Reviews for more guidance on PRs and test plans.
+
+This post called [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/) has a lot of good guidance, too.
+
+### Issue
+
+- Please search and register if you already have the issue you want to create. If you have a similar issue, you can add additional comments.
+- Please write a problem or suggestion in the issue. Never include more than one item in an issue.
+- Please be as detailed and concise as possible. \* If necessary, please take a screenshot and upload an image.
+
+### Pull request(PR)
+
+PR is available to `main` branch.
+
+Each PR should correspond to one idea and implement it coherently. This idea may be a feature that spans several parts of the codebase. For example, changing an API may include changes to the Android, iOS, and web implementations, the JavaScript SDK, and the docs for the API.
+
+Generally, each PR should contain one commit that is amended as you address code review feedback. Each commit should be meaningful and make sense on its own. Similarly, it should be easy to revert each commit. This keeps the commit history easier to read when people are working on this code or searching for a commit that could have broken something.
+
+### Coding Guidelines
+
+We follow [dooboolab coding principle 2021](https://medium.com/dooboolab/dooboolab-coding-principle-2021-c809d112b18d) when writing code for `dooboo-ui`.
+There are more descriptive rules in [style-gude](https://github.com/hyochan/style-guide/blob/main/docs/REACT.md) which we recommend to read before contributing.
+There are also few others to be considered specific to `dooboo-ui`.
+
+1. Never expose `single` attributes in style props.
+
+   Do
+
+   ```tsx
+   <Button textStyle={textStyle} />
+   ```
+
+   Don't
+
+   ```tsx
+   <Button textColor={textColor} />
+   ```
+
+   Exposing single attrs in style props leads to unmaintainable complicated component with unorgnized props. Example [flutter_calendar_carousel](https://github.com/dooboolab/flutter_calendar_carousel).
+
+2. Expose all style props in `styles` and style props of parent component in `style`.
+
+   ```tsx
+   type Styles = {
+     container?: StyleProp<ViewStyle>;
+     text?: StyleProp<TextStyle>;
+     disabledButton?: StyleProp<ViewStyle>;
+     disabledText?: StyleProp<TextStyle>;
+     hovered?: StyleProp<ViewStyle>;
+   };
+   ```
+
+   > You can see the exmaple in [Button L62-L63](https://github.com/dooboolab-community/dooboo-ui/blob/c0d114c46bbba5a8a8a05e91a782a682e4803dac/main/Button/Styles.tsx#L62-L63).
+   > This lets developers to check what kind of styles are nested in component.
+
+3. Provide `react element` when you find that there are more possibilities to have in your component.
+
+   For example, see the [CheckBox](https://github.com/dooboolab-community/dooboo-ui/blob/main/main/Checkbox/Styles.tsx) component.
+
+   ```tsx
+   <Checkbox
+     key={i}
+     checked={checked}
+     onPress={() => setChecked(!checked)}
+     startElement={<StyledText>Hello this is a checkbox</StyledText>}
+   />
+   ```
+
+   > By providing `startElement` instead of `leftImage` or `leftText`, developers will more likely fulfill their needs.
+
+4. Make your component as compact as possible and expose possibility with the `render` function.
+
+   This can be done with organized design in your [mental model](https://jamesclear.com/mental-models).
+   When done properly, it will gain so much benefit in `readability` which we care the most in [dooboolab coding principal](https://medium.com/dooboolab/dooboolab-coding-principle-2021-c809d112b18d).
+   However, we should also care about the `scalabiilty`. To provide that, expose seperate `render functions` where possible.
+
+   ```tsx
+   renderTitle={(item) => {
+     return (
+       <View style={{
+         paddingLeft: 20,
+         alignItems: 'center',
+         flexDirection: 'row',
+       }}>
+         <StyledIcon name="search-light" />
+         <Title>{item}</Title>
+       </View>
+     );
+   }}
+   renderBody={(item) => {
+     return (
+       <Fragment>
+         <CustomStyledItem>{item}</CustomStyledItem>
+       </Fragment>
+     );
+   }}
+   ```
+
+   > When `renderTitle` or `renderBody` is not provided, the component will render default implemented design underneath.
+
+   You can see the sample in [Accordion](https://github.com/dooboolab-community/dooboo-ui/tree/master/main/Accordion).
+
+5. Provide default colors for each theme (`light` and `dark`)
+
+   This can be easiliy accomplished by using `theme` variables provided in `dooboo-ui`.
+   You may also find out what [variables are in it](http://localhost:9001/?path=/docs/overview-theming--page#customizing-theme).
+
+   ```tsx
+   color: ${({theme}) => theme.textContrast};
+   ```
+
+#### Tips
+
+Try to write specification for ui component before writing code. How would you want yourself to use the component?
+For example, does below looks great? Anything more you think would be needed?
+
+```tsx
+<EditText
+  type="column"
+  placeholder="Default EditText"
+  value={email}
+  onChangeText={(text) => onTextChanged('EMAIL', text)}
+  style={{marginTop: 20, marginBottom: 24, paddingHorizontal: 36}}
+/>
+```
+
+> If you want to discuss on your proposal please feel free to open up anything in [discussions](https://github.com/dooboolab-community/dooboo-ui/discussions).
+
+#### Naming conventions
+
+- testID should be written in `kebab-case`
+  `testID = "my-test-id"`
+- Class name should be a `PascalCase`
+- Enum type should be a `PascalCase`
+- Constants should be written in `UPPER_SNAKE_CASE`
+  - Note that this is for `number`, `string` and constant `array`.
+  - Unformed data type like object or class variable should be written in `camelCase`.
+- Variables and functions should be written in `camelCase`
+- Assets name should be written in `lower_snake_case`
+  `const imgUrl = 'assets/icons/icon_add.png'`
+
+- **If you find code that does not fit in the coding convention, do not ever try to fix code that is not related to your purpose.**
+
+- [How to use prettier extension for the eslint code rules](https://medium.com/dooboolab/using-eslint-prettier-and-sort-imports-vscode-extensions-for-formatting-open-source-project-16edf317129d)
+- While you are using prettier extension, you may encounter **ternary operator** indentation problems
+
+  ![error](https://i.imgur.com/RhGrbLo.png)
+
+  you can use
+
+  ```
+  // prettier-ignore
+  ```
+
+  like below
+
+  ![fixes](https://i.imgur.com/x3bL5kf.png)
