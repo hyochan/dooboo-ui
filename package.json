@@ -33,7 +33,7 @@
     "build:packages": "lerna exec -- yarn build",
     "install:packages": "lerna exec -- yarn",
     "upgrade:packages": "lerna exec -- ncu -u && yarn install:packages",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@dooboo-ui/theme": "^0.12.16",

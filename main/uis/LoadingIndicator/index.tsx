@@ -5,8 +5,9 @@ import type {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import {ActivityIndicator, Image, View} from 'react-native';
+import {ActivityIndicator, Image} from 'react-native';
 import {useTheme} from '@dooboo-ui/theme';
+import styled from '@emotion/native';
 
 type Styles = {
   activityIndicator?: ViewStyle;
@@ -21,6 +22,10 @@ type Props = {
   imgSource?: string | ImageSourcePropType;
   customElement?: JSX.Element | (() => JSX.Element);
 };
+
+const Container = styled.View`
+  background-color: ${({theme}) => theme.bg.basic};
+`;
 
 export function LoadingIndicator({
   customElement,
@@ -45,7 +50,7 @@ export function LoadingIndicator({
   };
 
   return (
-    <View style={style}>
+    <Container style={style}>
       {customElement ? (
         typeof customElement === 'function' ? (
           customElement()
@@ -71,6 +76,6 @@ export function LoadingIndicator({
           ]}
         />
       )}
-    </View>
+    </Container>
   );
 }
