@@ -23,9 +23,7 @@ type Props = {
   customElement?: JSX.Element | (() => JSX.Element);
 };
 
-const Container = styled.View`
-  background-color: ${({theme}) => theme.bg.basic};
-`;
+const Container = styled.View``;
 
 export function LoadingIndicator({
   customElement,

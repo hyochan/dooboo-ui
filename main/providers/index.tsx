@@ -87,6 +87,7 @@ function AppProvider({children}: {children: JSX.Element}): JSX.Element {
               align-self: stretch;
               flex: 1;
               justify-content: center;
+              background-color: ${themeContext.theme.bg.basic};
             `}
           />
         ) : (
