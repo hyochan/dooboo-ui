@@ -243,6 +243,7 @@ export function IconButton({
                   color={iconColor}
                   name={icon || 'QuestBoxFill'}
                   size={iconSize}
+                  style={compositeStyles?.icon}
                 />
               )}
         </View>

@@ -22,6 +22,10 @@ export type FabProps = {
   gap?: number;
   style?: StyleProp<ViewStyle>;
   styles?: Styles;
+  iconButtonProps?: Omit<
+    React.ComponentProps<typeof IconButton>,
+    'icon' | 'onPress' | 'size'
+  >;
 };
 
 function FloatingActionButtons({
@@ -38,6 +42,7 @@ function FloatingActionButtons({
     default: 12,
   }),
   animationDuration = 200,
+  iconButtonProps,
 }: FabProps): JSX.Element {
   const {Fab, FabItem} = styles ?? {};
 
@@ -104,6 +109,7 @@ function FloatingActionButtons({
               onPress={() => onPressItem?.(icon)}
               size={buttonSize}
               testID={icon}
+              {...iconButtonProps}
             />
           </Animated.View>
         );
@@ -124,7 +130,12 @@ function FloatingActionButtons({
           Fab,
         ]}
       >
-        <IconButton icon={fabIcon} onPress={onPressFab} size={buttonSize} />
+        <IconButton
+          icon={fabIcon}
+          onPress={onPressFab}
+          size={buttonSize}
+          {...iconButtonProps}
+        />
       </Animated.View>
     </View>
   );

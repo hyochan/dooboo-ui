@@ -1,5 +1,5 @@
 import type {FC} from 'react';
-import type {ViewStyle} from 'react-native';
+import type {StyleProp, ViewStyle} from 'react-native';
 import styled from '@emotion/native';
 import {createIconSetFromIcoMoon} from '@expo/vector-icons';
 
@@ -3786,7 +3786,7 @@ export type IconProps = {
   name: IconName;
   size?: number;
   color?: string;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 };
 
 const Ico: FC<IconProps> = createIconSetFromIcoMoon(
