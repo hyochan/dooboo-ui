@@ -1,5 +1,7 @@
 # dooboo-ui
 
+> Deprecated and moved to [CPK-UI](https://github.com/crossplatformkorea/cpk-ui)
+
 Expo first React Native UI components. Simple and flexible which also supports themeing with default colors.
 
 [![Npm Version](http://img.shields.io/npm/v/dooboo-ui.svg?style=flat-square)](https://npmjs.org/package/dooboo-ui)
